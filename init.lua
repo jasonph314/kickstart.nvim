@@ -185,6 +185,17 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- Toggle indent lines
 vim.keymap.set('n', '<leader>ti', '<cmd>IBLToggle<cr>', { desc = '[T]oggle [I]ndent lines' })
 
+-- Toggle diagnostics
+local diagnostics_enabled = true
+vim.keymap.set('n', '<leader>td', function()
+  diagnostics_enabled = not diagnostics_enabled
+  if diagnostics_enabled then
+    vim.diagnostic.enable()
+  else
+    vim.diagnostic.disable()
+  end
+end, { desc = '[T]oggle [D]iagnostics' })
+
 -- Remove autocomment on Enter
 vim.api.nvim_create_autocmd('BufEnter', {
   callback = function()
@@ -366,7 +377,7 @@ require('lazy').setup({
     opts = {
       -- delay between pressing a key and opening which-key (milliseconds)
       -- this setting is independent of vim.o.timeoutlen
-      delay = 1000,
+      delay = 0,
       icons = {
         -- set icon mappings to true if you have a Nerd Font
         mappings = vim.g.have_nerd_font,
