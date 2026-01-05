@@ -1,6 +1,7 @@
 # kickstart.nvim
 
 ## Introduction
+Hi, this is my neovim setup currently. I'll update it along as I go. Overall pretty normal stuff but feel free to fork this repo if you find it interesting or useful!
 
 A starting point for Neovim that is:
 
