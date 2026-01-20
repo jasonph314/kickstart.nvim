@@ -196,6 +196,17 @@ vim.keymap.set('n', '<leader>td', function()
   end
 end, { desc = '[T]oggle [D]iagnostics' })
 
+-- Toggle autocomplete
+vim.g.cmp_enabled = true
+vim.keymap.set('n', '<leader>ta', function()
+  vim.g.cmp_enabled = not vim.g.cmp_enabled
+  if vim.g.cmp_enabled then
+    vim.notify('Autocomplete enabled', vim.log.levels.INFO)
+  else
+    vim.notify('Autocomplete disabled', vim.log.levels.INFO)
+  end
+end, { desc = '[T]oggle [A]utocomplete' })
+
 -- Remove autocomment on Enter
 vim.api.nvim_create_autocmd('BufEnter', {
   callback = function()
@@ -896,6 +907,10 @@ require('lazy').setup({
     --- @module 'blink.cmp'
     --- @type blink.cmp.Config
     opts = {
+      enabled = function()
+        return vim.g.cmp_enabled ~= false
+      end,
+
       keymap = {
         -- 'default' (recommended) for mappings similar to built-in completions
         --   <c-y> to accept ([y]es) the completion.
