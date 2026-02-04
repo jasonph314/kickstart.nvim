@@ -21,26 +21,19 @@ return {
       -- Compiler configuration
       vim.g.vimtex_compiler_method = 'latexmk'
       vim.g.vimtex_compiler_latexmk = {
-        build_dir = '',
+        build_dir = 'build',
         callback = 1,
         continuous = 1,
         executable = 'latexmk',
         hooks = {},
         options = {
+          '-shell-escape',
           '-verbose',
           '-file-line-error',
           '-synctex=1',
           '-interaction=nonstopmode',
+          '-outdir=build',
         },
-      }
-
-      -- Enable shell escape for packages that need it
-      vim.g.vimtex_compiler_latexmk.options = {
-        '-shell-escape',
-        '-verbose',
-        '-file-line-error',
-        '-synctex=1',
-        '-interaction=nonstopmode',
       }
 
       -- Enable syntax highlighting
