@@ -3,9 +3,13 @@ return {
     'lervag/vimtex',
     lazy = false,
     init = function()
-      -- PDF viewer configuration
-      vim.g.vimtex_view_method = 'zathura'
-      vim.g.vimtex_view_general_options = '--unique file:@pdf#src:@line@tex'
+      -- PDF viewer configuration (macOS uses Skim, Linux uses Zathura)
+      if vim.fn.has 'mac' == 1 or vim.fn.has 'macunix' == 1 then
+        vim.g.vimtex_view_method = 'skim'
+      else
+        vim.g.vimtex_view_method = 'zathura'
+        vim.g.vimtex_view_general_options = '--unique file:@pdf#src:@line@tex'
+      end
 
       -- Compiler configuration
       vim.g.vimtex_compiler_method = 'latexmk'
