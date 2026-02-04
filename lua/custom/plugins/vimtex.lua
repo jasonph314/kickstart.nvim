@@ -6,10 +6,17 @@ return {
       -- PDF viewer configuration (macOS uses Skim, Linux uses Zathura)
       if vim.fn.has 'mac' == 1 or vim.fn.has 'macunix' == 1 then
         vim.g.vimtex_view_method = 'skim'
+        -- Skim configuration for forward/inverse search
+        vim.g.vimtex_view_skim_sync = 1
+        vim.g.vimtex_view_skim_activate = 1
+        vim.g.vimtex_view_skim_reading_bar = 1
       else
         vim.g.vimtex_view_method = 'zathura'
         vim.g.vimtex_view_general_options = '--unique file:@pdf#src:@line@tex'
       end
+      
+      -- Ensure latexmk is in PATH (for macOS BasicTeX)
+      vim.env.PATH = '/usr/local/texlive/2025basic/bin/universal-darwin:' .. vim.env.PATH
 
       -- Compiler configuration
       vim.g.vimtex_compiler_method = 'latexmk'
